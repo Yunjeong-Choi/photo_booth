@@ -1,12 +1,14 @@
 import { useRef, useCallback, useState, Fragment } from "react";
-import Webcam from "react-webcam";
 import styled from "styled-components";
+import Webcam from "react-webcam";
+import ReactToPrint from "react-to-print";
 
 const photoWidth = 450;
 const photoHeight = 700;
 
 function App() {
   const webcamRef = useRef<Webcam>(null);
+  const componentToPrintRef = useRef<HTMLDivElement>(null);
   const [imageList, setImageList] = useState<string[]>([]);
   const [imagesInFrame, setImagesInFrame] = useState<string[]>([]);
 
@@ -41,40 +43,39 @@ function App() {
 
   return (
     <Container className="App">
-      <Fragment>
-        <CameraContainer>
-          <StyledWebcam
-            ref={webcamRef}
-            audio={false}
-            width={photoWidth}
-            height={photoHeight}
-            screenshotFormat="image/jpeg"
-            videoConstraints={{
-              ...videoConstraints,
-            }}
+      <CameraContainer>
+        <StyledWebcam
+          ref={webcamRef}
+          audio={false}
+          width={photoWidth}
+          height={photoHeight}
+          screenshotFormat="image/jpeg"
+          videoConstraints={{
+            ...videoConstraints,
+          }}
+        />
+        <button onClick={capture}>Capture photo</button>
+      </CameraContainer>
+      <ImageListContainer>
+        {imageList.map((image, index) => (
+          <Result
+            key={`result-${index}`}
+            src={image}
+            alt="capture result"
+            onClick={() => addToFrame(image)}
           />
-          <button onClick={capture}>Capture photo</button>
-        </CameraContainer>
-        <ImageListContainer>
-          {imageList.map((image, index) => (
-            <Result
-              key={`result-${index}`}
-              src={image}
-              alt="capture result"
-              onClick={() => addToFrame(image)}
-            />
-          ))}
-        </ImageListContainer>
-        <FrameContainer>
-          {imagesInFrame.map((image, index) => (
-            <SelectedImage
-              key={`selected-${index}`}
-              src={image}
-              alt="selected"
-            />
-          ))}
-        </FrameContainer>
-      </Fragment>
+        ))}
+      </ImageListContainer>
+      <FrameContainer ref={componentToPrintRef}>
+        {imagesInFrame.map((image, index) => (
+          <SelectedImage key={`selected-${index}`} src={image} alt="selected" />
+        ))}
+      </FrameContainer>
+      <ReactToPrint
+        trigger={() => <button>Print this out!</button>}
+        content={() => componentToPrintRef.current}
+        // pageStyle="@page { size: 2in 2.96in }"
+      />
     </Container>
   );
 }
@@ -89,6 +90,7 @@ const Container = styled.div`
 `;
 
 const CameraContainer = styled.div`
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -97,6 +99,7 @@ const CameraContainer = styled.div`
 const StyledWebcam = styled(Webcam)``;
 
 const ImageListContainer = styled.div`
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -110,17 +113,21 @@ const Result = styled.img`
 `;
 
 const FrameContainer = styled.div`
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 5px 0px;
-  width: 350px;
-  height: 510px;
+  align-items: center;
+  /* gap: 5px 0px; */
+  width: 400px;
+  height: 592px;
   overflow: hidden;
+  background-color: black;
 `;
 const SelectedImage = styled.img`
   width: 170px;
   height: 250px;
+  margin: 15px;
 `;
 
 export default App;
