@@ -6,20 +6,26 @@ import ImageItem from "./ImageItem";
 
 interface PhotoFrameProps {
   className?: string;
+  frameRef?: React.RefObject<HTMLDivElement>;
   imageList: string[];
-  withDeleteButton: boolean;
-  handleClickDeleteButton: (index: number) => void;
+  handleClickDeleteButton?: (index: number) => void;
 }
 
 const PhotoFrame = (props: PhotoFrameProps) => {
+  const handleDeleteFromFrameButton = (index: number) => {
+    if (props.handleClickDeleteButton) {
+      props.handleClickDeleteButton(index);
+    }
+  };
+
   return (
-    <Container className={props.className}>
+    <Container ref={props.frameRef} className={props.className}>
       <div>
         {props.imageList.map((image, index) => (
           <ImageContainer key={`image-in-frame-${index}`}>
-            {props.withDeleteButton && image !== "" && (
+            {props.handleClickDeleteButton && image !== "" && (
               <DeleteFromFrameButton
-                onClick={() => props.handleClickDeleteButton(index)}
+                onClick={() => handleDeleteFromFrameButton(index)}
               >
                 X
               </DeleteFromFrameButton>

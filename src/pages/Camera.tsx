@@ -40,7 +40,7 @@ function Camera() {
         setImageCount((prev) => prev + 1);
         setCountdown(10);
         startCountdown();
-      }, 3000);
+      }, 3000); // TODO: settimeout 안쓰고 순서 맞추기?
     } else if (imageList.length >= 6) {
       setTimeout(() => {
         navigate("/gallery", { state: { imageList } });
@@ -85,6 +85,8 @@ function Camera() {
   return (
     <StyledContainer>
       <CameraContainer>
+        {/* TODO: 왜 카메라 천천히 등장하지 */}
+        {/* TODO: 찰칵하는 시각효과 */}
         <Webcam
           ref={webcamRef}
           audio={false}
@@ -100,6 +102,7 @@ function Camera() {
       <Countdown>
         <p>{`6장 중 ${imageCount}번째 촬영`}</p>
         <h2>{countdown}</h2>
+        {/* TODO: 자동으로 이동합니다. */}
       </Countdown>
     </StyledContainer>
   );

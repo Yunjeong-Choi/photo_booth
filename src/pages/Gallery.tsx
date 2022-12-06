@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import ContainerWithBackground from "../components/ContainerWithBackground";
-import DefaultLinkButton from "../components/DefaultLinkButton";
+import DefaultButton from "../components/DefaultButton";
 import ImageItem from "../components/ImageItem";
 import PhotoFrame from "../components/PhotoFrame";
 
 const Gallery = () => {
+  const navigate = useNavigate();
   const { state } = useLocation() as { state?: { imageList?: string[] } };
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [imagesInFrame, setImagesInFrame] = useState<string[]>([
@@ -46,6 +47,10 @@ const Gallery = () => {
     setSelectedImages(copiedSelectedImages);
   };
 
+  const handleClickButton = () => {
+    navigate("/print", { state: { imagesInFrame } });
+  };
+
   return (
     <StyledContainer>
       <Section>
@@ -68,12 +73,9 @@ const Gallery = () => {
         <SectionTitle>미리보기</SectionTitle>
         <PhotoFrame
           imageList={imagesInFrame}
-          withDeleteButton={true}
           handleClickDeleteButton={deleteFromFrame}
         />
-        <NextButton destinationPath="/print" linkState={{ imagesInFrame }}>
-          다음
-        </NextButton>
+        <NextButton handleClickButton={handleClickButton}>다음</NextButton>
       </Section>
     </StyledContainer>
   );
@@ -121,7 +123,7 @@ const Notice = styled.p`
   font-size: 3rem;
 `;
 
-const NextButton = styled(DefaultLinkButton)`
+const NextButton = styled(DefaultButton)`
   width: 32rem;
   height: 6rem;
 `;
