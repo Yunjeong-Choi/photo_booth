@@ -52,7 +52,7 @@ function Camera() {
     if (timerRef.current === null) {
       timerRef.current = setInterval(() => {
         setCountdown((prev) => prev - 1);
-      }, 500); //TODO: 1250
+      }, 100); //TODO: 1250
     }
   }, []);
 
@@ -83,7 +83,7 @@ function Camera() {
   };
 
   return (
-    <ContainerWithBackground>
+    <StyledContainer>
       <CameraContainer>
         <Webcam
           ref={webcamRef}
@@ -101,9 +101,13 @@ function Camera() {
         <p>{`6장 중 ${imageCount}번째 촬영`}</p>
         <h2>{countdown}</h2>
       </Countdown>
-    </ContainerWithBackground>
+    </StyledContainer>
   );
 }
+
+const StyledContainer = styled(ContainerWithBackground)`
+  flex-direction: column;
+`;
 
 const CameraContainer = styled.div`
   position: relative;
