@@ -11,6 +11,8 @@ const ContainerWithBackground = (props: ContainerWithBackgroundProps) => {
 };
 
 const Container = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
