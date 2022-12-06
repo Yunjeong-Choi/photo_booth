@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ContainerWithBackground from "../components/ContainerWithBackground";
-import DefaultLinkButton from "../components/DefaultLinkButton";
+import DefaultButton from "../components/DefaultButton";
 
 function Home() {
+  const navigate = useNavigate();
+
+  const handleClickButton = () => {
+    navigate("/Camera");
+  };
+
+  // TODO: 폰트 넣기
   return (
     <StyledContainer>
       <From>FROM. 욱엽&해경</From>
@@ -13,7 +21,7 @@ function Home() {
 
       총 6번 사진을 찍은 후
       4장의 사진을 골라주세요`}</Message>
-      <NextButton destinationPath="/Camera">시작하기</NextButton>
+      <NextButton handleClickButton={handleClickButton}>시작하기</NextButton>
     </StyledContainer>
   );
 }
@@ -37,7 +45,7 @@ const Message = styled.p`
   white-space: pre-line;
 `;
 
-const NextButton = styled(DefaultLinkButton)`
+const NextButton = styled(DefaultButton)`
   width: 39.5rem;
   height: 7.5rem;
   margin-top: 8rem;
