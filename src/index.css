@@ -32,6 +32,19 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html,
+body {
+  position: fixed;
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
 button {
   -webkit-appearance: none;
   -webkit-tap-highlight-color: transparent;
