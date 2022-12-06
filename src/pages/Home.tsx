@@ -10,11 +10,12 @@ function Home() {
     navigate("/Camera");
   };
 
-  // TODO: 폰트 넣기
   return (
     <StyledContainer>
       <From>FROM. 욱엽&해경</From>
-      <Title>인생네컷을 선물합니다</Title>
+      <Title>
+        <span>인생네컷</span>을 선물합니다
+      </Title>
       <Message>{`오늘 와주셔서 감사합니다!
       여러분에게도 즐거운 하루가 되길 바라며
       인생네컷을 준비했습니다.
@@ -37,6 +38,11 @@ const From = styled.p`
 const Title = styled.p`
   margin-top: 2.7rem;
   font-size: 5rem;
+
+  > span {
+    font-size: 5rem;
+    font-weight: 700;
+  }
 `;
 
 const Message = styled.p`

@@ -1,3 +1,12 @@
+@font-face {
+  font-family: "SeoulHangangCB";
+  src: url("./assets/fonts/SeoulHangang-CB-Regular.woff") format("woff");
+}
+@font-face {
+  font-family: "SeoulHangangCBL";
+  src: url("./assets/fonts/SeoulHangang-CBL-Regular.woff") format("woff");
+}
+
 html,
 body,
 #root {
@@ -14,10 +23,10 @@ body,
   box-sizing: border-box;
 
   color: white;
-  font-family: "Special", "Spoqa Han Sans Neo", "sans-serif";
+  font-family: "SeoulHangangCB", "Special", "Spoqa Han Sans Neo", "sans-serif";
   font-size: 62.5%;
   line-height: 120%;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.1em;
 
   -webkit-overflow-scrolling: touch;
   -webkit-tap-highlight-color: transparent;

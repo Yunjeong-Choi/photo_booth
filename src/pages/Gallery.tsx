@@ -66,7 +66,8 @@ const Gallery = () => {
               />
             </ImageContainer>
           ))}
-          <Notice>{`${"n"}초 후 자동으로 사진이 선택됩니다.`}</Notice>
+          {/* TODO: 사진 자동 선택 */}
+          {/* <Notice>{`${"n"}초 후 자동으로 사진이 선택됩니다.`}</Notice> */}
         </ImageListContainer>
       </Section>
       <Section>

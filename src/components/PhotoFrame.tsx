@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import img_no_image from "../assets/img_no_image.svg";
-import img_pink_heart from "../assets/img_pink_heart.svg";
+import img_no_image from "../assets/imgs/img_no_image.svg";
+import img_pink_heart from "../assets/imgs/img_pink_heart.svg";
 import ImageItem from "./ImageItem";
 
 interface PhotoFrameProps {

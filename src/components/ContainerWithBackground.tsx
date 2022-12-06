@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background from "../assets/img_photo_booth_background.svg";
+import background from "../assets/imgs/img_photo_booth_background.svg";
 
 interface ContainerWithBackgroundProps {
   className?: string;
