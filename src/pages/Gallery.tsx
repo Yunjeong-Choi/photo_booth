@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,16 +10,26 @@ import img_pink_heart from "../assets/img_pink_heart.svg";
 
 const Gallery = () => {
   const { state } = useLocation() as { state?: { imageList?: string[] } };
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [imagesInFrame, setImagesInFrame] = useState<string[]>([
-    img_no_image,
-    img_no_image,
-    img_no_image,
-    img_no_image,
+    "",
+    "",
+    "",
+    "",
   ]);
 
+  useEffect(() => {
+    const loopCount = 4 - selectedImages.length;
+    let blankList: string[] = [];
+    for (let i = 0; i < loopCount; i++) {
+      blankList.push("");
+    }
+    setImagesInFrame([...selectedImages, ...blankList]);
+  }, [selectedImages]);
+
   const addToFrame = (target: string) => {
-    if (imagesInFrame.length < 4) {
-      setImagesInFrame((prev) => {
+    if (selectedImages.length < 4) {
+      setSelectedImages((prev) => {
         const copy = [...prev];
         copy.push(target);
         return copy;
@@ -30,6 +40,12 @@ const Gallery = () => {
   if (!state || !state.imageList) {
     return null;
   }
+
+  const deleteFromFrame = (index: number) => {
+    const copiedSelectedImages = [...selectedImages];
+    copiedSelectedImages.splice(index, 1);
+    setSelectedImages(copiedSelectedImages);
+  };
 
   return (
     <StyledContainer>
@@ -55,7 +71,18 @@ const Gallery = () => {
         <PhotoFrame>
           <div>
             {imagesInFrame.map((image, index) => (
-              <Image key={`selected-${index}`} src={image} alt="selected" />
+              <ImageContainer key={`image-in-frame-${index}`}>
+                {image !== "" && (
+                  <DeleteFromFrameButton onClick={() => deleteFromFrame(index)}>
+                    X
+                  </DeleteFromFrameButton>
+                )}
+                <Image
+                  key={`selected-${index}`}
+                  src={image === "" ? img_no_image : image}
+                  alt="selected"
+                />
+              </ImageContainer>
             ))}
             <HeartsDecoration>
               <img src={img_pink_heart} alt="heart" />
@@ -143,6 +170,21 @@ const PhotoFrame = styled.div`
   }
 `;
 
+const ImageContainer = styled.div`
+  position: relative;
+`;
+
+const DeleteFromFrameButton = styled.button`
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+
+  padding: 0.5rem;
+  background-color: transparent;
+  color: black;
+  font-size: 2rem;
+`;
+
 const HeartsDecoration = styled.div`
   flex-shrink: 0;
   display: flex;
@@ -153,7 +195,7 @@ const HeartsDecoration = styled.div`
   margin-right: 5.5rem;
 
   > img {
-    width: 3rem;
+    width: 2.5rem;
   }
 `;
 
