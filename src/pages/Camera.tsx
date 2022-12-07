@@ -72,7 +72,7 @@ function Camera() {
     if (shootingCountdownRef.current === null) {
       shootingCountdownRef.current = setInterval(() => {
         setShootingCountdown((prev) => prev - 1);
-      }, 1250); // TODO: 1250
+      }, 1000);
     }
   }, []);
 
@@ -165,7 +165,7 @@ const Result = styled.img<{ isResultVisible: boolean }>`
 
 const Countdown = styled.div`
   position: absolute;
-  top: 6rem;
+  top: 5rem;
   left: 8rem;
 
   font-size: 5rem;

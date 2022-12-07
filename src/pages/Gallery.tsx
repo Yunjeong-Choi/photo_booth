@@ -57,7 +57,7 @@ const Gallery = () => {
         <SectionTitle>사진 4장을 선택해주세요</SectionTitle>
         <ImageListContainer>
           {state.imageList.map((image, index) => (
-            <ImageContainer>
+            <ImageContainer key={`shooting-result-${image}`}>
               <span>{index + 1}</span>
               <ImageItem
                 key={`result-${index}`}
