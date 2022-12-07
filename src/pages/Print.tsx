@@ -34,12 +34,16 @@ const Print = () => {
     // 인쇄시작
     printDiv.style.display = "block";
     document.body.style.display = "none";
+
     setTimeout(() => {
       window.print();
+    }, 1000);
+
+    window.onafterprint = () => {
       document.body.style.display = "block";
       printDiv.style.display = "none";
       navigate("/end");
-    }, 1000);
+    };
   };
 
   return (
