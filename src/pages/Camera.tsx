@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
 import ContainerWithBackground from "../components/ContainerWithBackground";
 
+const shootingDelay = 2500;
 const photoWidth = 490;
 const photoHeight = 700;
 
@@ -23,6 +24,7 @@ function Camera() {
   const [imageCount, setImageCount] = useState(1);
   const [initialCountdown, setInitialCountdown] = useState(5);
   const [shootingCountdown, setShootingCountdown] = useState(10);
+  const [isResultVisible, setIsResultVisible] = useState(false);
 
   useEffect(() => {
     startInitialCountdown();
@@ -50,11 +52,11 @@ function Camera() {
         setImageCount((prev) => prev + 1);
         setShootingCountdown(10);
         startShootingCountdown();
-      }, 3000); // TODO: settimeout 안쓰고 순서 맞추기?
+      }, shootingDelay); // TODO: settimeout 안쓰고 순서 맞추기?
     } else if (imageList.length >= 6) {
       setTimeout(() => {
         navigate("/gallery", { state: { imageList } });
-      }, 3000);
+      }, shootingDelay);
     }
   }, [imageList.length]);
 
@@ -70,7 +72,7 @@ function Camera() {
     if (shootingCountdownRef.current === null) {
       shootingCountdownRef.current = setInterval(() => {
         setShootingCountdown((prev) => prev - 1);
-      }, 1250);
+      }, 1250); // TODO: 1250
     }
   }, []);
 
@@ -91,12 +93,12 @@ function Camera() {
   const showResult = (result: string) => {
     if (resultImageRef.current) {
       resultImageRef.current.setAttribute("src", result);
-      resultImageRef.current.style.display = "block";
+      setIsResultVisible(true);
       setTimeout(() => {
         if (resultImageRef.current) {
-          resultImageRef.current.style.display = "none";
+          setIsResultVisible(false);
         }
-      }, 3000);
+      }, 2000);
     }
   };
 
@@ -104,7 +106,6 @@ function Camera() {
     <StyledContainer>
       <CameraContainer>
         {/* TODO: 왜 카메라 천천히 등장하지 */}
-        {/* TODO: 찰칵하는 시각효과 */}
         <Webcam
           ref={webcamRef}
           audio={false}
@@ -115,7 +116,12 @@ function Camera() {
             ...videoConstraints,
           }}
         />
-        <Result ref={resultImageRef} src={""} alt={"shooting result"} />
+        <Result
+          ref={resultImageRef}
+          src={""}
+          alt={"shooting result"}
+          isResultVisible={isResultVisible}
+        />
       </CameraContainer>
       <Countdown>
         {initialCountdown > 0 ? (
@@ -143,15 +149,18 @@ const CameraContainer = styled.div`
   position: relative;
 `;
 
-const Result = styled.img`
+const Result = styled.img<{ isResultVisible: boolean }>`
   position: absolute;
   top: 0;
   left: 0;
 
-  display: none;
-
   width: ${photoWidth}px;
   height: ${photoHeight}px;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.8));
+
+  opacity: ${(props) => (props.isResultVisible ? "1" : "0")};
+  transition: opacity 0.5s ease-in-out;
+  transition-property: ${(props) => props.isResultVisible && "none"};
 `;
 
 const Countdown = styled.div`
