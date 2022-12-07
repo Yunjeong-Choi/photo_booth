@@ -39,11 +39,11 @@ const Print = () => {
       window.print();
     }, 1000);
 
-    window.onafterprint = () => {
-      document.body.style.display = "block";
-      printDiv.style.display = "none";
-      navigate("/end");
-    };
+    // window.onafterprint = () => {
+    //   document.body.style.display = "block";
+    //   printDiv.style.display = "none";
+    //   navigate("/end");
+    // };
   };
 
   return (
