@@ -50,7 +50,7 @@ const Print = () => {
         <Notice>
           {`① 아래 "프린트" 버튼을 누르고,
             ② [소장용 N장] + [편지용 추가 1장] 설정
-            ③ "인쇄" 버튼 클릭하면 끝!`}
+            ③ 오른쪽 상단의 "프린트" 버튼 클릭하면 끝!`}
         </Notice>
         <PrintButton handleClickButton={printDiv}>프린트</PrintButton>
       </NoticeSection>
