@@ -7,6 +7,7 @@ import styled from "styled-components";
 import ContainerWithBackground from "../components/ContainerWithBackground";
 import DefaultButton from "../components/DefaultButton";
 import PhotoFrame from "../components/PhotoFrame";
+import MadeBy from "../components/MadeBy";
 
 const Print = () => {
   const navigate = useNavigate();
@@ -76,21 +77,24 @@ const Print = () => {
         imageList={state.imagesInFrame}
       />
       <NoticeSection>
-        <SectionTitle>프린트 하기</SectionTitle>
+        {/* <SectionTitle>프린트 하기</SectionTitle>
         <Notice>
           {`① 아래 "프린트" 버튼을 누르고,
             ② [소장용 N장] + [편지용 추가 1장] 설정
             ③ 오른쪽 상단의 "프린트" 버튼 클릭하면 끝!`}
         </Notice>
-        <PrintButton handleClickButton={printDiv}>프린트</PrintButton>
-        <SectionTitle>사진 저장하기</SectionTitle>
+        <PrintButton handleClickButton={printDiv}>프린트</PrintButton> */}
+        <SectionTitle>프린트 하기</SectionTitle>
         <Notice>
-          {`① 아래 "사진 저장" 버튼을 누르고,
+          {`① 아래 "저장" 버튼을 누르고,
             ② 진행요원에게 아이패드를 주시면
             ③ 프린트 해드려요!`}
         </Notice>
-        <SaveButton handleClickButton={saveDiv}>사진 저장</SaveButton>
+        <PrintButton handleClickButton={saveDiv}>
+          <span>내 마음 속에</span>⌜저장⌟
+        </PrintButton>
       </NoticeSection>
+      <MadeBy />
     </StyledContainer>
   );
 };
@@ -107,7 +111,7 @@ const NoticeSection = styled.div`
 `;
 
 const SectionTitle = styled.div`
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: 800;
 `;
 
@@ -115,18 +119,25 @@ const Notice = styled.p`
   width: 100%;
   font-size: 3rem;
   white-space: pre-line;
-  line-height: 200%;
+  line-height: 150%;
   text-align: left;
 `;
 
 const PrintButton = styled(DefaultButton)`
   width: 36rem;
   height: 6rem;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
+
+  > span {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    color: black;
+  }
 `;
 
 const SaveButton = styled(PrintButton)`
   background: linear-gradient(180deg, #f5a17a 0%, #f64847 100%);
+  margin-bottom: 0;
 `;
 
 export default Print;

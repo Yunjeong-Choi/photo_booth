@@ -1,8 +1,10 @@
 import { useRef, useCallback, useState, useEffect } from "react";
-import styled from "styled-components";
-import Webcam from "react-webcam";
 import { useNavigate } from "react-router-dom";
+import Webcam from "react-webcam";
+import styled from "styled-components";
+
 import ContainerWithBackground from "../components/ContainerWithBackground";
+import MadeBy from "../components/MadeBy";
 
 const shootingDelay = 2500;
 const photoWidth = 490;
@@ -104,6 +106,20 @@ function Camera() {
 
   return (
     <StyledContainer>
+      <Countdown>
+        {initialCountdown > 0 ? (
+          <>
+            <p>{`5초 후에
+                촬영을 시작합니다`}</p>
+            <h3>{initialCountdown}</h3>
+          </>
+        ) : (
+          <>
+            <p>{`6장 중 ${imageCount}번째 촬영`}</p>
+            <h3>{shootingCountdown}</h3>
+          </>
+        )}
+      </Countdown>
       <CameraContainer>
         {/* TODO: 왜 카메라 천천히 등장하지 */}
         <Webcam
@@ -123,20 +139,7 @@ function Camera() {
           isResultVisible={isResultVisible}
         />
       </CameraContainer>
-      <Countdown>
-        {initialCountdown > 0 ? (
-          <>
-            <p>{`5초 후에
-                촬영을 시작합니다`}</p>
-            <h3>{initialCountdown}</h3>
-          </>
-        ) : (
-          <>
-            <p>{`6장 중 ${imageCount}번째 촬영`}</p>
-            <h3>{shootingCountdown}</h3>
-          </>
-        )}
-      </Countdown>
+      <MadeBy />
     </StyledContainer>
   );
 }

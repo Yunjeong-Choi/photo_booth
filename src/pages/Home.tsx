@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
 import ContainerWithBackground from "../components/ContainerWithBackground";
 import DefaultButton from "../components/DefaultButton";
+import MadeBy from "../components/MadeBy";
 
 function Home() {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ function Home() {
       총 6번 사진을 찍은 후
       4장의 사진을 골라주세요`}</Message>
       <NextButton handleClickButton={handleClickButton}>시작하기</NextButton>
+      <MadeBy />
     </StyledContainer>
   );
 }
