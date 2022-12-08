@@ -18,30 +18,32 @@ const Print = () => {
   }
 
   const printDiv = () => {
-    // 인쇄할 부분 추출
-    const html = document.querySelector("html");
-    const printSection = document.querySelector(".print-element")?.outerHTML;
+    window.print();
 
-    // 인쇄용 div 생성
-    const printDiv = document.createElement("div");
-    printDiv.id = "page";
-    printDiv.style.width = "100vw";
-    printDiv.style.height = "100vh";
-    printDiv.style.backgroundColor = "black";
-    html?.appendChild(printDiv);
+    // // 인쇄할 부분 추출
+    // const html = document.querySelector("html");
+    // const printSection = document.querySelector(".print-element")?.outerHTML;
 
-    // 인쇄용 div에 내용 넣기
-    if (printSection) {
-      printDiv.innerHTML = printSection;
-    }
+    // // 인쇄용 div 생성
+    // const printDiv = document.createElement("div");
+    // printDiv.id = "page";
+    // printDiv.style.width = "100vw";
+    // printDiv.style.height = "100vh";
+    // printDiv.style.backgroundColor = "black";
+    // html?.appendChild(printDiv);
 
-    // 인쇄시작
-    printDiv.style.display = "block";
-    document.body.style.display = "none";
+    // // 인쇄용 div에 내용 넣기
+    // if (printSection) {
+    //   printDiv.innerHTML = printSection;
+    // }
 
-    setTimeout(() => {
-      window.print();
-    }, 1000);
+    // // 인쇄시작
+    // printDiv.style.display = "block";
+    // document.body.style.display = "none";
+
+    // setTimeout(() => {
+    //   window.print();
+    // }, 1000);
 
     // window.onafterprint = () => {
     //   document.body.style.display = "block";
