@@ -1,7 +1,9 @@
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import DefaultButton from "../components/DefaultButton";
+import styled from "styled-components";
+
 import ContainerWithBackground from "../components/ContainerWithBackground";
+import DefaultButton from "../components/DefaultButton";
+import MadeBy from "../components/MadeBy";
 
 const End = () => {
   const navigate = useNavigate();
@@ -13,11 +15,6 @@ const End = () => {
   return (
     <StyledContainer>
       <SectionTitle>지금 이순간, 인쇄중</SectionTitle>
-      {/* TODO: 문구 깜빡이게
-      {`이 프로그램을 개발해주신
-        신부 친구 최윤정님, 김승연님 감사합니다!
-        개발 문의 : yunjeong.dev.2173@gmail.com
-        winkitee@gmail.com`} */}
       <Notice>
         {`오늘 결혼식에 와주셔서 감사합니다!
 
@@ -25,6 +22,7 @@ const End = () => {
           욱엽이와 해경이가 평생 간직할게요`}
       </Notice>
       <GoHomeButton handleClickButton={goToHomePage}>처음으로</GoHomeButton>
+      <MadeBy />
     </StyledContainer>
   );
 };

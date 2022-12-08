@@ -7,6 +7,7 @@ import styled from "styled-components";
 import ContainerWithBackground from "../components/ContainerWithBackground";
 import DefaultButton from "../components/DefaultButton";
 import PhotoFrame from "../components/PhotoFrame";
+import MadeBy from "../components/MadeBy";
 
 const Print = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const Print = () => {
             ③ 오른쪽 상단의 "프린트" 버튼 클릭하면 끝!`}
         </Notice>
         <PrintButton handleClickButton={printDiv}>프린트</PrintButton> */}
-        <SectionTitle>사진 저장하기</SectionTitle>
+        <SectionTitle>프린트 하기</SectionTitle>
         <Notice>
           {`① 아래 "저장" 버튼을 누르고,
             ② 진행요원에게 아이패드를 주시면
@@ -93,6 +94,7 @@ const Print = () => {
           <span>내 마음 속에</span>⌜저장⌟
         </PrintButton>
       </NoticeSection>
+      <MadeBy />
     </StyledContainer>
   );
 };

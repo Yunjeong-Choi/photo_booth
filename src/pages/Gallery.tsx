@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ContainerWithBackground from "../components/ContainerWithBackground";
 import DefaultButton from "../components/DefaultButton";
 import ImageItem from "../components/ImageItem";
+import MadeBy from "../components/MadeBy";
 import PhotoFrame from "../components/PhotoFrame";
 
 const Gallery = () => {
@@ -78,6 +79,7 @@ const Gallery = () => {
         />
         <NextButton handleClickButton={handleClickButton}>다음</NextButton>
       </Section>
+      <MadeBy />
     </StyledContainer>
   );
 };
