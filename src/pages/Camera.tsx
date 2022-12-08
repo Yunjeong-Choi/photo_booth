@@ -125,6 +125,7 @@ function Camera() {
         <Webcam
           ref={webcamRef}
           audio={false}
+          mirrored={true}
           width={photoWidth}
           height={photoHeight}
           screenshotFormat="image/jpeg"
