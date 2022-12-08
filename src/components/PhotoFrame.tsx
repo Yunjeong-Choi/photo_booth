@@ -6,7 +6,7 @@ import ImageItem from "./ImageItem";
 
 interface PhotoFrameProps {
   className?: string;
-  frameRef?: React.RefObject<HTMLDivElement>;
+  photoFrameRef?: React.RefObject<HTMLDivElement>;
   imageList: string[];
   handleClickDeleteButton?: (index: number) => void;
 }
@@ -19,7 +19,7 @@ const PhotoFrame = (props: PhotoFrameProps) => {
   };
 
   return (
-    <Container ref={props.frameRef} className={props.className}>
+    <Container ref={props.photoFrameRef} className={props.className}>
       <div>
         {props.imageList.map((image, index) => (
           <ImageContainer key={`image-in-frame-${index}`}>

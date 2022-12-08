@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import html2canvas from "html2canvas";
+import { v4 as uuid4 } from "uuid";
 import styled from "styled-components";
 
 import ContainerWithBackground from "../components/ContainerWithBackground";
@@ -7,6 +10,7 @@ import PhotoFrame from "../components/PhotoFrame";
 
 const Print = () => {
   const navigate = useNavigate();
+  const photoFrameRef = useRef<HTMLDivElement>(null);
   const { state } = useLocation() as { state?: { imagesInFrame?: string[] } };
 
   if (!state || !state.imagesInFrame) {
@@ -46,9 +50,29 @@ const Print = () => {
     // };
   };
 
+  const saveDiv = () => {
+    const saveTarget = photoFrameRef.current;
+
+    if (saveTarget) {
+      html2canvas(saveTarget).then(function (canvas) {
+        const img = document.createElement("a");
+        img.download = `${uuid4()}.png`;
+        img.href = canvas.toDataURL();
+        document.body.appendChild(img);
+        img.click();
+      });
+    }
+
+    navigate("/end");
+  };
+
   return (
     <StyledContainer>
-      <PhotoFrame className={"print-element"} imageList={state.imagesInFrame} />
+      <PhotoFrame
+        photoFrameRef={photoFrameRef}
+        className={"print-element"}
+        imageList={state.imagesInFrame}
+      />
       <NoticeSection>
         <SectionTitle>프린트 하기</SectionTitle>
         <Notice>
@@ -57,6 +81,13 @@ const Print = () => {
             ③ 오른쪽 상단의 "프린트" 버튼 클릭하면 끝!`}
         </Notice>
         <PrintButton handleClickButton={printDiv}>프린트</PrintButton>
+        <SectionTitle>사진 저장하기</SectionTitle>
+        <Notice>
+          {`① 아래 "사진 저장" 버튼을 누르고,
+            ② 진행요원에게 아이패드를 주시면
+            ③ 프린트 해드려요!`}
+        </Notice>
+        <SaveButton handleClickButton={saveDiv}>사진 저장</SaveButton>
       </NoticeSection>
     </StyledContainer>
   );
@@ -70,7 +101,7 @@ const NoticeSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2rem;
 `;
 
 const SectionTitle = styled.div`
@@ -79,6 +110,7 @@ const SectionTitle = styled.div`
 `;
 
 const Notice = styled.p`
+  width: 100%;
   font-size: 3rem;
   white-space: pre-line;
   line-height: 200%;
@@ -88,6 +120,11 @@ const Notice = styled.p`
 const PrintButton = styled(DefaultButton)`
   width: 36rem;
   height: 6rem;
+  margin-bottom: 3rem;
+`;
+
+const SaveButton = styled(PrintButton)`
+  background: linear-gradient(180deg, #f5a17a 0%, #f64847 100%);
 `;
 
 export default Print;
