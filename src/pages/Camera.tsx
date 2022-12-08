@@ -66,7 +66,7 @@ function Camera() {
     if (initialCountdownRef.current === null) {
       initialCountdownRef.current = setInterval(() => {
         setInitialCountdown((prev) => prev - 1);
-      }, 100); // TODO: 1000
+      }, 1000);
     }
   }, []);
 
@@ -74,7 +74,7 @@ function Camera() {
     if (shootingCountdownRef.current === null) {
       shootingCountdownRef.current = setInterval(() => {
         setShootingCountdown((prev) => prev - 1);
-      }, 100); // TODO: 1000
+      }, 1000);
     }
   }, []);
 
