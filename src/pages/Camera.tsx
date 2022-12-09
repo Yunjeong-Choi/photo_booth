@@ -53,7 +53,7 @@ function Camera() {
     if (imageList.length > 0 && imageList.length < 6) {
       setTimeout(() => {
         setImageCount((prev) => prev + 1);
-        setShootingCountdown(10);
+        setShootingCountdown(5);
         startShootingCountdown();
       }, shootingDelay); // TODO: settimeout 안쓰고 순서 맞추기?
     } else if (imageList.length >= 6) {
