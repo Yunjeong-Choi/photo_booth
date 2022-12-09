@@ -59,7 +59,7 @@ const Print = () => {
     if (saveTarget) {
       html2canvas(saveTarget).then(function (canvas) {
         const img = document.createElement("a");
-        img.download = `${uuid4()}.png`;
+        img.download = `욱경네컷-${uuid4()}.png`;
         img.href = canvas.toDataURL();
         document.body.appendChild(img);
         img.click();

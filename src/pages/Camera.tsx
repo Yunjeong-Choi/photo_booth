@@ -7,6 +7,7 @@ import ContainerWithBackground from "../components/ContainerWithBackground";
 import MadeBy from "../components/MadeBy";
 
 const shootingDelay = 2500;
+const countdownDelay = 1250;
 const photoWidth = 490;
 const photoHeight = 700;
 
@@ -25,7 +26,7 @@ function Camera() {
   const [imageList, setImageList] = useState<string[]>([]);
   const [imageCount, setImageCount] = useState(1);
   const [initialCountdown, setInitialCountdown] = useState(5);
-  const [shootingCountdown, setShootingCountdown] = useState(10);
+  const [shootingCountdown, setShootingCountdown] = useState(5);
   const [isResultVisible, setIsResultVisible] = useState(false);
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function Camera() {
     if (initialCountdownRef.current === null) {
       initialCountdownRef.current = setInterval(() => {
         setInitialCountdown((prev) => prev - 1);
-      }, 1000);
+      }, countdownDelay);
     }
   }, []);
 
@@ -74,7 +75,7 @@ function Camera() {
     if (shootingCountdownRef.current === null) {
       shootingCountdownRef.current = setInterval(() => {
         setShootingCountdown((prev) => prev - 1);
-      }, 1000);
+      }, countdownDelay);
     }
   }, []);
 
