@@ -8,6 +8,10 @@ import MadeBy from "../components/MadeBy";
 const End = () => {
   const navigate = useNavigate();
 
+  const goToPrintPage = () => {
+    navigate(-1);
+  };
+
   const goToHomePage = () => {
     navigate("/");
   };
@@ -21,7 +25,12 @@ const End = () => {
           추가로 인쇄한 1장은 방명록에 남겨주세요
           욱엽이와 해경이가 평생 간직할게요`}
       </Notice>
-      <GoHomeButton handleClickButton={goToHomePage}>처음으로</GoHomeButton>
+      <ButtonArea>
+        <GoHomeButton handleClickButton={goToHomePage}>처음으로</GoHomeButton>
+        <PrintMoreButton handleClickButton={goToPrintPage}>
+          추가 프린트 / 이미지 저장
+        </PrintMoreButton>
+      </ButtonArea>
       <MadeBy />
     </StyledContainer>
   );
@@ -29,7 +38,7 @@ const End = () => {
 
 const StyledContainer = styled(ContainerWithBackground)`
   flex-direction: column;
-  gap: 8rem;
+  gap: 6rem;
 `;
 
 const SectionTitle = styled.div`
@@ -39,6 +48,21 @@ const SectionTitle = styled.div`
 const Notice = styled.p`
   font-size: 3rem;
   white-space: pre-line;
+  line-height: 120%;
+`;
+
+const ButtonArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const PrintMoreButton = styled(DefaultButton)`
+  width: 28rem;
+  height: 4.5rem;
+  opacity: 0.7;
+  font-size: 1.5rem;
 `;
 
 const GoHomeButton = styled(DefaultButton)`
